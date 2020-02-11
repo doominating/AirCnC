@@ -1,4 +1,6 @@
 const mongoose = require('mongoose');
+const fs = require('fs');
+const path = require('path');
 
 const SpotSchema = new mongoose.Schema(
   {
@@ -19,7 +21,15 @@ const SpotSchema = new mongoose.Schema(
 );
 
 SpotSchema.virtual('thumbnail_url').get(function() {
-  return `http://localhost:3333/files/${this.thumbnail}`;
+  const thumb_file = path.resolve(__dirname, '..', `uploads/${this.thumbnail}`);
+  let resolve_url = '';
+
+  if (fs.existsSync(thumb_file)) {
+    resolve_url = `http://localhost:3333/files/${this.thumbnail}`;
+  } else {
+    resolve_url = 'http://localhost:3333/files/spot-placeholder.png';
+  }
+  return resolve_url;
 });
 
 module.exports = mongoose.model('Spot', SpotSchema);

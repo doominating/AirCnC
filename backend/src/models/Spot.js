@@ -21,7 +21,12 @@ const SpotSchema = new mongoose.Schema(
 );
 
 SpotSchema.virtual('thumbnail_url').get(function() {
-  const thumb_file = path.resolve(__dirname, '..', `uploads/${this.thumbnail}`);
+  const thumb_file = path.resolve(
+    __dirname,
+    '..',
+    '..',
+    `uploads/${this.thumbnail}`,
+  );
   let resolve_url = '';
 
   if (fs.existsSync(thumb_file)) {

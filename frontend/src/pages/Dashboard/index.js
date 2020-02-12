@@ -30,7 +30,7 @@ export default function Dashboard() {
               }}
             />
             <strong>{spot.company}</strong>
-            <span>{spot.price ? `R${spot.price}/dia` : 'GRATUITO'}</span>
+            <span>{spot.price ? `R$${spot.price}/dia` : 'GRATUITO'}</span>
           </li>
         ))}
       </ul>

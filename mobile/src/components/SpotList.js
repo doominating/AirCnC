@@ -4,8 +4,8 @@ import {
   View,
   StyleSheet,
   Text,
-  Image,
   FlatList,
+  Image,
   TouchableOpacity,
 } from 'react-native';
 
@@ -92,9 +92,10 @@ const styles = StyleSheet.create({
 
   thumbnail: {
     width: 200,
-    height: 120,
+    height: 200,
     resizeMode: 'cover',
     borderRadius: 2,
+    backgroundColor: '#ccc',
   },
 
   company: {

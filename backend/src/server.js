@@ -1,14 +1,21 @@
 const express = require('express');
 const mongoose = require('mongoose');
 const cors = require('cors');
-const http = require('http');
-const dotenv = require('dotenv');
 const path = require('path');
+const dotenv = require('dotenv');
+
+const http = require('http');
+const socketio = require('socket.io');
 
 const routes = require('./routes');
 
 const app = express();
 const server = http.Server(app);
+const io = socketio(server);
+
+io.on('connection', socket => {
+  console.log('Usuário conectado', socket.id);
+});
 
 dotenv.config();
 mongoose.connect(process.env.MONGO_URI, {

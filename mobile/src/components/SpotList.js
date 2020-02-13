@@ -53,7 +53,10 @@ function SpotList({ tech, navigation }) {
               {item.price ? `R$${item.price}/dia` : 'GRATUITO'}
             </Text>
 
-            <TouchableOpacity style={styles.button}>
+            <TouchableOpacity
+              onPress={() => handleNavigate(item._id)}
+              style={styles.button}
+            >
               <Text style={styles.buttonText}>Solicitar reserva</Text>
             </TouchableOpacity>
           </View>

@@ -13,16 +13,27 @@ const app = express();
 const server = http.Server(app);
 const io = socketio(server);
 
-io.on('connection', socket => {
-  console.log('Usuário conectado', socket.id);
-});
-
 dotenv.config();
 mongoose.connect(process.env.MONGO_URI, {
   useNewUrlParser: true,
   useUnifiedTopology: true,
   useFindAndModify: false,
   useCreateIndex: true,
+});
+
+const connectedUsers = {};
+
+io.on('connection', socket => {
+  const { user_id } = socket.handshake.query;
+
+  connectedUsers[user_id] = socket.id;
+});
+
+app.use((req, res, next) => {
+  req.io = io;
+  req.connectedUsers = connectedUsers;
+
+  return next();
 });
 
 app.use(cors());

@@ -20,6 +20,11 @@ function SpotList({ tech, navigation }) {
         params: { tech },
       });
 
+      // workaround to set the server address of thumbnail correctly
+      response.data.map(spot => {
+        spot.thumbnail_url = `${api.defaults.baseURL}/files/${spot.thumbnail}`;
+      });
+
       setSpots(response.data);
     }
 
